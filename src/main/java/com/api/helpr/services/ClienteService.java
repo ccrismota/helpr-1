@@ -3,12 +3,13 @@ package com.api.helpr.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.helpr.domain.Cliente;
 import com.api.helpr.domain.Pessoa;
-import com.api.helpr.domain.Tecnico;
 import com.api.helpr.domain.dtos.ClienteDTO;
 import com.api.helpr.repositories.ClienteRepository;
 import com.api.helpr.repositories.PessoaRepository;
@@ -47,6 +48,14 @@ public class ClienteService {
 		if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
 			throw new DataIntegrityViolationException("E-mail já cadastrado no sistema!");
 		}
+	}
+
+
+	public Cliente create(@Valid ClienteDTO objDto) {
+		objDto.setId(null);
+		validaCpfEEmail(objDto);
+		Cliente newObj = new Cliente(objDto);
+		return repository.save(newObj);
 	}
 
 	
