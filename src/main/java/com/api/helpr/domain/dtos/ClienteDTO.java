@@ -33,7 +33,7 @@ public class ClienteDTO extends Pessoa{
 
 	public ClienteDTO() {
 		super();
-		addPerfil(Perfil.CLIENTE);		
+		addPerfils(Perfil.CLIENTE);		
 	}
 
 	public ClienteDTO(Cliente obj) {
@@ -45,7 +45,7 @@ public class ClienteDTO extends Pessoa{
 		this.senha = obj.getSenha();
 		this.perfils = obj.getPerfils().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = obj.getDataCriacao();
-		addPerfil(Perfil.CLIENTE);
+		addPerfils(Perfil.CLIENTE);
 	}
 	
 
