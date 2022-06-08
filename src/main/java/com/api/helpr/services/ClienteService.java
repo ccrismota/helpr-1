@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.api.helpr.domain.Cliente;
 import com.api.helpr.domain.Pessoa;
-import com.api.helpr.domain.Tecnico;
 import com.api.helpr.domain.dtos.ClienteDTO;
 import com.api.helpr.repositories.ClienteRepository;
 import com.api.helpr.repositories.PessoaRepository;
@@ -36,22 +35,6 @@ public class ClienteService {
 		return repository.findAll();
 	}
 	
-	
-	
-	private void validaCpfEEmail(ClienteDTO objDto) {
-
-		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDto.getCpf());
-		if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
-			throw new DataIntegrityViolationException("CPF já cadastrado no sistema!");
-		}
-
-		obj = pessoaRepository.findByEmail(objDto.getEmail());
-		if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
-			throw new DataIntegrityViolationException("E-mail já cadastrado no sistema!");
-		}
-	}
-
-	
 	public Cliente create(@Valid ClienteDTO objDto) {
 		objDto.setId(null);
 		validaCpfEEmail(objDto);
@@ -68,5 +51,30 @@ public class ClienteService {
 		return repository.save(oldObj);
 	}
 
+
+	public void delete(Integer id) {
+		Cliente obj = findById(id);
+		if(obj.getChamados().size() > 0) {
+			throw new DataIntegrityViolationException("O Cliente: "+
+		id+" tem chamados no sistema: "+
+		obj.getChamados().size());
+		}
+		repository.deleteById(id);
+		
+	}
+	
+	
+	private void validaCpfEEmail(ClienteDTO objDto) {
+
+		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDto.getCpf());
+		if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
+			throw new DataIntegrityViolationException("CPF já cadastrado no sistema!");
+		}
+
+		obj = pessoaRepository.findByEmail(objDto.getEmail());
+		if (obj.isPresent() && obj.get().getId() != objDto.getId()) {
+			throw new DataIntegrityViolationException("E-mail já cadastrado no sistema!");
+		}
+	}
 	
 }
