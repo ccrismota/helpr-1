@@ -38,7 +38,7 @@ public class ClienteResource {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<ClienteDTO>> findAllTecnicos(){
+	public ResponseEntity<List<ClienteDTO>> findAllCliente(){
 		List<Cliente> list = service.findAllClientes();
 		List<ClienteDTO> listDto = list.stream()
 				.map(cli -> new ClienteDTO(cli)).collect(Collectors.toList());
