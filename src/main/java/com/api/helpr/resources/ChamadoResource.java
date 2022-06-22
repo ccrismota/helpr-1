@@ -42,12 +42,20 @@ public class ChamadoResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	@GetMapping(value="/relatorio/{tecnico}")
+	@GetMapping(value="/relatorio/tecnico/{tecnico}")
 	public ResponseEntity<List<ChamadoDTO>> reportTecnicoChamado(@PathVariable Integer tecnico){
 		List<Chamado> listReport = service.reportTecnicoChamado(tecnico);
 		List<ChamadoDTO> listDto = listReport.stream().map(rep -> new ChamadoDTO(rep)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
+	
+	@GetMapping(value="/relatorios/cliente/{cliente}")
+	public ResponseEntity<List<ChamadoDTO>> reportClienteChamados(@PathVariable Integer cliente){
+		List<Chamado> listReport = service.reportClienteChamados(cliente);
+		List<ChamadoDTO> listDTO = listReport.stream().map(rep -> new ChamadoDTO(rep)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
+	}
+	
 	
 	@PreAuthorize("hasAnyRole('ROLE_TECNICO')")
 	@PostMapping
