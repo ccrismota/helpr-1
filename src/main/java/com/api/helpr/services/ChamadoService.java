@@ -54,6 +54,10 @@ public class ChamadoService {
 	public List<Chamado> reportTecnicoChamado(Integer tecnico) {
 		return repository.findByTecnico(tecnico);
 	}	
+	
+	public List<Chamado> reportClienteChamados(Integer cliente) {
+		return repository.findByCliente(cliente);
+	}
 
 	
 	private Chamado newChamado(ChamadoDTO obj) {
@@ -79,6 +83,8 @@ public class ChamadoService {
 		chamado.setObservacoes(obj.getObservacoes());
 		return chamado;
 	}
+
+
 
 	
 }
