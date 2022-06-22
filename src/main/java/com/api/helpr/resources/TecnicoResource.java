@@ -47,7 +47,7 @@ public class TecnicoResource {
 	}
 	
 	//Inserção de dados Técnico
-	@PreAuthorize("HasAnyRoly('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@PostMapping
 	public ResponseEntity<TecnicoDTO> createTecnico(@Valid @RequestBody TecnicoDTO objDto){
 		Tecnico newObj = service.create(objDto);
@@ -57,7 +57,7 @@ public class TecnicoResource {
 	}
 	
 	//Alteração de dados Técnicos
-	@PreAuthorize("HasAnyRoly('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<TecnicoDTO> updateTecnico(
 			@PathVariable Integer id, @RequestBody TecnicoDTO objDto){
@@ -66,7 +66,7 @@ public class TecnicoResource {
 	}
 	
 	//Exclusão de tecnico com uso do serviço
-	@PreAuthorize("HasAnyRoly('ROLE_ADMIN')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN')")
 	@DeleteMapping(value="{id}")
 	public ResponseEntity<TecnicoDTO> delete(@PathVariable Integer id){
 		service.delete(id);
