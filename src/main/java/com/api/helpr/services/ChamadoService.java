@@ -73,6 +73,11 @@ public class ChamadoService {
 		chamado.setTitulo(obj.getTitulo());
 		chamado.setObservacoes(obj.getObservacoes());
 		return chamado;
+	}
+
+	public List<Chamado> reportTecnicoChamado(Integer tecnico) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 
 }

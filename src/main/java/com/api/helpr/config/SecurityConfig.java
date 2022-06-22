@@ -22,11 +22,10 @@ import com.api.helpr.security.JWTAuthorizationFilter;
 import com.api.helpr.security.JWTUtil;
 
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled=true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
-	private static final String[] PUBLIC_MATCHERS = {"/h2-console/**"};
-	
+	private static final String[] PUBLIC_MATCHERS ={"/h2-console/**"};
 	
 	@Autowired
 	private Environment env;
@@ -35,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private JWTUtil jwtUtil;
 	
 	@Autowired
-	private UserDetailsService  userDetailsService;
+	private UserDetailsService userDetailsService;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -68,8 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		source.registerCorsConfiguration("/**", configuration);
 		return source;
 	}
-
-
+	
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
