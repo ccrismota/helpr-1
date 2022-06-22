@@ -51,6 +51,11 @@ public class ChamadoService {
 		return repository.save(oldObj);
 	}
 	
+	public List<Chamado> reportTecnicoChamado(Integer tecnico) {
+		return repository.findByTecnico(tecnico);
+	}	
+
+	
 	private Chamado newChamado(ChamadoDTO obj) {
 		Tecnico tecnico = tecnicoService.findById(obj.getTecnico());
 		Cliente cliente = clienteService.findById(obj.getCliente());
@@ -75,9 +80,5 @@ public class ChamadoService {
 		return chamado;
 	}
 
-	public List<Chamado> reportTecnicoChamado(Integer tecnico) {
-		// TODO Auto-generated method stub
-		return null;
-	}	
-
+	
 }

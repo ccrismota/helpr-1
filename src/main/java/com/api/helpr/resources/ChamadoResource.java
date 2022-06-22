@@ -43,10 +43,10 @@ public class ChamadoResource {
 	}
 	
 	@GetMapping(value="/relatorio/{tecnico}")
-	public ResponseEntity<ChamadoDTO> reportTecnicoChamado(@PathVariable Integer tecnico){
+	public ResponseEntity<List<ChamadoDTO>> reportTecnicoChamado(@PathVariable Integer tecnico){
 		List<Chamado> listReport = service.reportTecnicoChamado(tecnico);
 		List<ChamadoDTO> listDto = listReport.stream().map(rep -> new ChamadoDTO(rep)).collect(Collectors.toList());
-		return null;
+		return ResponseEntity.ok().body(listDto);
 	}
 	
 	@PreAuthorize("hasAnyRole('ROLE_TECNICO')")
